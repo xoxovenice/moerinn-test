@@ -22,19 +22,18 @@ label day1_start:
                 "The house's silence was broken by the creak of the floor as I took a step forward."
                 "There didn't seem to be any movement nearby."
             label menu_1:
-                "Check the drawers" if checkdrawers == False:
-                    $ checkdrawers = True
-                    $ Moerinn_check += 1
-                    "I opened the drawers gently as I could. Though, it still made some noise."
-                    "I tried looking for anything useful."
-                    "Something that can help me leave."
-                        label menu_2:
+                menu:
+                    "Check the drawers" if checkdrawers == False:
+                        $ checkdrawers = True
+                        $ Moerinn_check += 1
+                        "I opened the drawers gently as I could. Though, it still made some noise."
+                        "I tried looking for anything useful."
+                        "Something that can help me leave."
                         if Moerinn_check >= 5:
-                            m "Oh! You're awake already!" with vpunch
-                            "I didn't even hear her footsteps!"
+                                jump menu_2
                         else:
                             "There's a butterfly knife here."
-                            label bfk:
+                        label bfk:
                                 menu:
                                     "Take it":
                                         $ butterfly = True
@@ -42,44 +41,81 @@ label day1_start:
                                         jump menu_1
                                     "Leave it":
                                         jump menu_1
-                "Check the boxes" if checkboxes == False:
-                    $ checkboxes = True
-                    $ Moerinn_check += 1
-                    "Some boxes weren't taped properly."
-                    "I opened them up."
-                    "These are filled with so many toys..."
-                    if Moerinn_check >= 5:
-                        jump menu_2
-                    else:
-                        "I didn't find anything here."
-                        jump menu_1
-                "Check the potted plant" if checkplant == False:
-                    $ checkplant = True
-                    $ Moerinn_check += 1
-                    "There was only one potted plant."
-                    "I walked up to it, getting on my knees and inspecting."
-                    "It seems regular enough... I guess no one would really hide anything here."
-                    if Moerinn_check >= 5:
-                        jump menu_2
-                    else:
-                        "I didn't find anything here."
-                "Check the floors" if checkfloors == False:
-                    $ checkfloors = True
-                    $ Moerinn_check += 1
-                    "I tried looking at floors for anything."
-                    "Maybe someone dropped something there?"
-                    if Moerinn_check >= 5:
-                        jump menu_2
-                    else:
-                        "I didn't find anything here."
-                        jump menu_1
-                "Check curtains" if checkcurtains == False:
-                    $ checkcurtains = True
-                    $ Moerinn_check += 1
-                    "I walked up to the curtains, lifting them up slightly."
-                    if Moerinn_check >= 5:
-                        jump menu_2
-                    else:
-                        "It's cemented."
-                        "It has a drawing of a sky and sun on it."
-                        jump menu_1
+                    "Check the boxes" if checkboxes == False:
+                        $ checkboxes = True
+                        $ Moerinn_check += 1
+                        "Some boxes weren't taped properly."
+                        "I opened them up."
+                        "These are filled with so many toys..."
+                        if Moerinn_check >= 5:
+                            jump menu_2
+                        else:
+                            "I didn't find anything here."
+                            jump menu_1
+                    "Check the potted plant" if checkplant == False:
+                        $ checkplant = True
+                        $ Moerinn_check += 1
+                        "There was only one potted plant."
+                        "I walked up to it, getting on my knees and inspecting."
+                        "It seems regular enough... I guess no one would really hide anything here."
+                        if Moerinn_check >= 5:
+                            jump menu_2
+                        else:
+                            "I didn't find anything here."
+                            jump menu_1
+                    "Check the floors" if checkfloors == False:
+                        $ checkfloors = True
+                        $ Moerinn_check += 1
+                        "I tried looking at floors for anything."
+                        "Maybe someone dropped something there?"
+                        if Moerinn_check >= 5:
+                            jump menu_2
+                        else:
+                            "I didn't find anything here."
+                            jump menu_1
+                    "Check curtains" if checkcurtains == False:
+                        $ checkcurtains = True
+                        $ Moerinn_check += 1
+                        "I walked up to the curtains, lifting them up slightly."
+                        if Moerinn_check >= 5:
+                            jump menu_2
+                        else:
+                            "It's cemented."
+                            "It has a drawing of a sky and sun on it."
+                            jump menu_1
+
+
+label menu_2:
+    m "Oh! You're awake already!" with vpunch
+    "I didn't even hear her footsteps!"
+    m "So... Did you sleep well?"
+    menu:
+        "Yeah":
+            $ povblunt += 1
+            pov "Yeah. It was pretty nice."
+            $ Moerinn_heart += 5
+            m "That's great to hear!"
+            m "I DID get you a pretty nice bed."
+        "No.":
+            $ povblunt += 1
+            pov "No, I didn't."
+            m "Really? But it's such a nice bed!"
+            m "Any animal would love it! It's so soft!"
+            "I looked at where my bed was."
+            "There laid a pet bed."
+        "K-Kinda...":
+            $ povmeek += 1
+            pov "Yeah... A little...?"
+            m "Are you responding or are you questioning?"
+            m "Whatever it is,"
+            $ Moerinn_heart += 5
+            m "Your tone makes the answer all the much cuter!"
+        "Maybe":
+            "I shrugged."
+            pov "I don't know, you tell me."
+            m "You're not sure?"
+            "She giggled slightly at my answer."
+            $ Moerinn_heart += 5
+            m "Hah! You're funny."
+            m "I'll take that as a yes though, I'm not buying a new bed for you."
+            m "Unless you're good!"

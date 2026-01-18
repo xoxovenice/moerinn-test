@@ -315,7 +315,7 @@ label after_menu5:
                                 else:
                                     m "{size=*0.5}I really hope that doesn't leave a concussion..."
                                 jump day1_start
-                    "Don't check it":
+                "Don't check it":
                         "Thinking about it again, I don't really wanna know what's in there."
                         "Why did I feel I was getting watched again?"
                         jump after_menu6
