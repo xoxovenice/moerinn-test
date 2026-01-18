@@ -13,7 +13,7 @@ label day1_start:
     "But I'm not sure where I am exactly, and if I should."
     menu:
         "Get up and look around":
-            if povquiet >= 2:
+            if povquiet >= 3:
                 $ Moerinn_check += 0
                 "I quietly took a step frontwards, sighing in relief."
                 "I didn't make any noise. That's good."
