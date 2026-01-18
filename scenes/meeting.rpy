@@ -112,22 +112,43 @@ label after_menu1:
             $ Moerinn_heart += 1
             jump after_menu2
         "I'm [povname].":
+            if povname == "Moerinn":
+                $ givename == True
+                $ povblunt += 1
+                m "Oh my gosh! We go the same name!"
+                $ Moerinn_Met = True
+                $ moerinn_name = "Moerinn"
+            else:
                 $ givename == True
                 $ povblunt += 1
                 m "Woah! I like your name!"
         "... I'm [povname].":
-            $ givename = True
-            $ povmeek += 1
-            m "Woah! I like your name!"
-            $ Moerinn_heart += 3
+                if povname == "Moerinn":
+                    $ givename == True
+                    $ povmeek += 1
+                    m "Oh my gosh! We go the same name!"
+                    $ Moerinn_Met = True
+                    $ moerinn_name = "Moerinn"
+                else:
+                    $ givename = True
+                    $ povmeek += 1
+                    $ Moerinn_heart += 3
+                    m "Woah! I like your name!"
         "I'm [povname]!":
-            $ givename = True
-            $ povhappy += 1
-            m "Haha!"
-            m "Your enthusiasm is infectious!"
-            $ Moerinn_heart += 3
-            m "I like it!"
-            m "I like your name!"
+            if povname == "Moerinn":
+                $ givename == True
+                $ povhappy += 1
+                m "You're so bright! And we have the same name!"
+                $ Moerinn_Met = True
+                $ moerinn_name = "Moerinn"
+            else:
+                $ givename = True
+                $ povhappy += 1
+                m "Haha!"
+                m "Your enthusiasm is infectious!"
+                $ Moerinn_heart += 3
+                m "I like it!"
+                m "I like your name!"
         "...":
             $ povquiet += 1
             $ Moerinn_Anger += 1
@@ -141,6 +162,8 @@ label after_menu1:
 label after_menu2:
     if dddres == True:
         m "I'm Moerinn."
+        $ Moerinn_Met = True
+        $ moerinn_name = "Moerinn"
     else:
      m "I'm Moerinn!"
     $ Moerinn_Met = True
@@ -308,17 +331,27 @@ label after_menu5:
                                 with vpunch
                                 $ health -= 10
                                 "I heard her voice as I was losing consciousness."
-                                jump day1_start
                                 if Moerinn_Anger >= 7:
                                     $ health -= 5
                                     m "{size=*0.5}You've been pissing me off since earlier. I hope I hit hard enough."
+                                    scene black
+                                    with fade
+                                    jump day1_start
                                 else:
                                     m "{size=*0.5}I really hope that doesn't leave a concussion..."
-                                jump day1_start
+                                    scene black
+                                    with fade
+                                    jump day1_start
+                        "...":
+                            an "Hi."
+                            "Something felt wrong."
+                            "Her tone immediately changed. I can't really tell what tone it took but it sounded..."
+                            "Mischievous."
+                            jump after_menu6
                 "Don't check it":
-                        "Thinking about it again, I don't really wanna know what's in there."
-                        "Why did I feel I was getting watched again?"
-                        jump after_menu6
+                    "Thinking about it again, I don't really wanna know what's in there."
+                    "Why did I feel I was getting watched again?"
+                    jump after_menu6
 
 label menu1_missed:
     if Moerinn_Anger >= 7:
@@ -339,6 +372,8 @@ label menu1_missed:
             "My thoughts were all piling up so fast, I could hardly think."
             "All I knew was to run as far away as I could from her."
             "{size=*2.0}{b}BANG!" with vpunch
+            scene black
+            with fade
             if Moerinn_Anger >= 7:
                 $ health -= 15
             else:
