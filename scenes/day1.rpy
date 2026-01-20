@@ -104,18 +104,17 @@ label day1_start:
                 pov "Help..."
             else:
                 pov "HELP!!!"
+            $ yellingdiag = True
             $ caught = True
             jump menu_2
 
 
 label menu_2:
-    if Moerinn_Anger >= 7 and caught == True:
+    if Moerinn_Anger >= 7 and caught == True and yellingdiag:
         $ Moerinn_Anger += 15
         m "You have some nerve yelling at MY house after pissing me off yesterday."
     elif Moerinn_Anger >= 7 and caught == False:
         m "I honestly thought you'd run your mouth off like a dog again."
-        m "Screaming or whatever."
-        m "Or acting like a dog like how you were yesteday."
         m "But you didn't! Color me impressed. My standards for you were pretty low though."
         $ Moerinn_heart += 5
     if povmeek >= 3 or povquiet >= 3 and povloud >= 1:
@@ -127,6 +126,7 @@ label menu_2:
         m "So... Did you sleep well, jerk?"
     else:
         m "So... Did you sleep well?"
+    m "I chose that bed for you specifically."
     menu:
         "Yeah":
             $ povblunt += 1
@@ -164,7 +164,8 @@ label menu_2:
                 m "HAHAHA—!!!"
                 m "Oh man, that caught me off guard."
                 m "I'm not even mad at you anymore, jerk."
-                $ Moerinn_anger -= 10
+                $ Moerinn_anger = 0
+                $ Moerinn_tease = True
             m "You're not sure?"
             "She giggled slightly at my answer."
             $ Moerinn_heart += 5
@@ -177,8 +178,48 @@ label menu_2:
             m "Not only are you rude, you're also nosey."
             m "You really should work for the police,"
             m "Having more nosey bitches would really help them!"
-        m "Mind telling me why you were snooping around?"
+        elif Moerinn_Anger >= 10 and yellingdiag == True:
+            m "Will you ever stop barking like a dog?"
+        else:
+            m "Mind telling me why you were snooping around?"
     else:
         m "I really hope you don't mind me keeping you captive..."
         label menu_3:
             m "You hungry?"
+            m "I can cook something up for you."
+            if Moerinn_Anger >= 10:
+                m "Even if you piss me off."
+            if friendreply == True:
+                m "Also, your friend never came."
+                "What is she talking about?"
+                m "Like... Yesterday?"
+                m "You either lied or they cancelled on you. Or something!"
+                m "Whatever it is, I checked. I waited a few hours."
+                pov "How would you even know which one was my friend?"
+                m "I know a bit about you, that's all I can say."
+                m "So do you wanna eat or not?"
+            else:
+                m "Do you wanna eat?"
+                menu:
+                    "Yes":
+                        m "Oh, great!"
+                        m "Cool."
+                        if Moerinn_Anger >= 25 and Moerinn_heart >= -10:
+                            m "You know how people say \"The best way to someone's heart is their stomach\"?"
+                            m "MAYBE you'll be in mine if your stomach is full!"
+                            m "... That made no sense. Nevermind."
+                            m "I hate you, that's YOUR fault I can't speak."
+                            $ Moerinn_heart -= -10
+                        elif Moerinn_anger >= 25:
+                            m "You won't mind getting fed dog food, do you?"
+                            m "Just... You know. Thought of treating you the way you're acting."
+                            $ Moerinn_sadism += 5
+                        else:
+                            m "I'll get you something, be good!"
+                        $ checkfloors = False
+                        $ checkplant = False
+                        $ checkboxes = False
+                        $ checkcurtains = False
+                        $ checkdrawers = False
+                        if:
+                            jump menu_1

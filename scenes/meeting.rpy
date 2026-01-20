@@ -112,43 +112,17 @@ label after_menu1:
             $ Moerinn_heart += 1
             jump after_menu2
         "I'm [povname].":
-            if povname == "Moerinn":
-                $ givename == True
-                $ povblunt += 1
-                m "Oh my gosh! We go the same name!"
-                $ Moerinn_Met = True
-                $ moerinn_name = "Moerinn"
-            else:
-                $ givename == True
-                $ povblunt += 1
-                m "Woah! I like your name!"
+            $ Moerinn_heart += 3
+            $ povblunt
+            jump namesblunt
         "... I'm [povname].":
-                if povname == "Moerinn":
-                    $ givename == True
-                    $ povmeek += 1
-                    m "Oh my gosh! We go the same name!"
-                    $ Moerinn_Met = True
-                    $ moerinn_name = "Moerinn"
-                else:
-                    $ givename = True
-                    $ povmeek += 1
-                    $ Moerinn_heart += 3
-                    m "Woah! I like your name!"
+            $ Moerinn_heart += 3
+            $ povmeek += 1
+            jump namesmeek
         "I'm [povname]!":
-            if povname == "Moerinn":
-                $ givename == True
-                $ povhappy += 1
-                m "You're so bright! And we have the same name!"
-                $ Moerinn_Met = True
-                $ moerinn_name = "Moerinn"
-            else:
-                $ givename = True
-                $ povhappy += 1
-                m "Haha!"
-                m "Your enthusiasm is infectious!"
-                $ Moerinn_heart += 3
-                m "I like it!"
-                m "I like your name!"
+            $ Moerinn_heart += 4
+            $ povhappy += 1
+            jump nameshappy
         "...":
             $ povquiet += 1
             $ Moerinn_Anger += 1
@@ -166,8 +140,9 @@ label after_menu2:
         $ moerinn_name = "Moerinn"
     else:
      m "I'm Moerinn!"
-    $ Moerinn_Met = True
-    $ moerinn_name = "Moerinn"
+    if Moerinn_Met == False:
+        $ Moerinn_Met = True
+        $ moerinn_name = "Moerinn"
     m "It's nice to meet you!"
     m "Weeelll... I know you're here in the mall for a reason."
 
@@ -334,11 +309,13 @@ label after_menu5:
                                 if Moerinn_Anger >= 7:
                                     $ health -= 5
                                     m "{size=*0.5}You've been pissing me off since earlier. I hope I hit hard enough."
+                                    $ Moerinn_sadism += 10
                                     scene black
                                     with fade
                                     jump day1_start
                                 else:
                                     m "{size=*0.5}I really hope that doesn't leave a concussion..."
+                                    $ Moerinn_sadism += 10
                                     scene black
                                     with fade
                                     jump day1_start
@@ -362,6 +339,7 @@ label menu1_missed:
         show screen countdown(timer_jump="menu1_hit", time=0.5)
     else:
         m "Hold still, please."
+        $ Moerinn_sadism += 10
         "She was already breathing heavily, her hands gripping a baseball bat."
         show screen countdown(timer_jump="menu1_hit", time=1)
     menu:
@@ -376,6 +354,7 @@ label menu1_missed:
             with fade
             if Moerinn_Anger >= 7:
                 $ health -= 15
+                $ Moerinn_sadism += 10
             else:
                 $ health -= 10
             jump day1_start
