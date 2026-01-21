@@ -33,7 +33,7 @@ label day1_start:
                         "I opened the drawers gently as I could. Though, it still made some noise."
                         "I tried looking for anything useful."
                         "Something that can help me leave."
-                        if Moerinn_check >= 5:
+                        if Moerinn_check >= 5 and scenefinish == False:
                                 $ caught = True
                                 jump menu_2
                         elif butterfly == True:
@@ -54,7 +54,7 @@ label day1_start:
                         "Some boxes weren't taped properly."
                         "I opened them up."
                         "These are filled with so many toys..."
-                        if Moerinn_check >= 5:
+                        if Moerinn_check >= 5 and scenefinish == False:
                             $ caught = True
                             jump menu_2
                         else:
@@ -66,7 +66,7 @@ label day1_start:
                         "There was only one potted plant."
                         "I walked up to it, getting on my knees and inspecting."
                         "It seems regular enough... I guess no one would really hide anything here."
-                        if Moerinn_check >= 5:
+                        if Moerinn_check >= 5 and scenefinish == False:
                             $ caught = True
                             jump menu_2
                         else:
@@ -77,7 +77,7 @@ label day1_start:
                         $ Moerinn_check += 1
                         "I tried looking at floors for anything."
                         "Maybe someone dropped something there?"
-                        if Moerinn_check >= 5:
+                        if Moerinn_check >= 5 and scenefinish == False:
                             $ caught = true
                             jump menu_2
                         else:
@@ -87,13 +87,15 @@ label day1_start:
                         $ checkcurtains = True
                         $ Moerinn_check += 1
                         "I walked up to the curtains, lifting them up slightly."
-                        if Moerinn_check >= 5:
+                        if Moerinn_check >= 5 and scenefinish == False:
                             $ caught = True
                             jump menu_2
                         else:
                             "It's cemented."
                             "It has a drawing of a sky and sun on it."
                             jump menu_1
+                if checkboxes == True, checkcurtains == True, checkfloors == True, checkplant == True, checkdrawers == True:
+                    jump scenefood
         "Wait":
             if passagg == True:
                 $ caught = False
@@ -110,8 +112,8 @@ label day1_start:
             $ caught = True
             jump menu_2
 
-
 label menu_2:
+    $ scenefinish = True
     if Moerinn_Anger >= 7 and caught == True and yellingdiag:
         $ Moerinn_Anger += 15
         m "You have some nerve yelling at MY house after pissing me off yesterday."
@@ -184,8 +186,54 @@ label menu_2:
             m "Will you ever stop barking like a dog?"
         else:
             m "Mind telling me why you were snooping around?"
+            menu:
+                "I was curious":
+                    $ Moerinn_heart += 15
+                    m "Oh."
+                    m "Atleast you're honest!"
+                    m "Can you see if any of my stuff got lost in there?"
+                    m "Especially my butterfly knife."
+                    m "I think I lost it."
+                    m "Anyway."
+                "Get me out of here!":
+                    if Moerinn_Anger >= 25:
+                        $ Moerinn_Anger += 30
+                    else:
+                        $ Moerinn_Anger += 10
+                    m "... I don't wanna."
+                    m "Not yet."
+                    m "Or ever."
+                    m "You might tell the police."
+                    m "You're acting so mean..."
+                "(lie) Looking for you...?":
+                    $ lie_meter += 1
+                    m "Oh?"
+                    if lie_meter >= 2:
+                        $ Moerinn_Anger += 15
+                        m "You're telling the truth this time, right?"
+                    else:
+                        $ Moerinn_heart += 5
+                        m "How sweet!"
+                        m "You could've yelled for me, though."
+                        m "I might've heard."
+                        pov "Might've?"
+                        m "I have bad hearing sometimes... And usually zoned out."
+                        m "My friends have told me about it before."
+                        m "Anywho, anyshoe!"
+                "...":
+                    m "..."
+                    if povquiet >= 3:
+                        $ povquiet += 1
+                        m "You know..."
+                        m "There's people who always have so everything to say,"
+                        m "And there's you, who never has anything to say."
+                        if Moerinn_Anger >= 10:
+                            $ Moerinn_Anger += 10
+                    else:
+                        m "Guess you're still processing."
+            jump menu_3
     else:
-        m "I really hope you don't mind me keeping you captive..."
+        m "I really hope you don't mind me keeping you captive."
         label menu_3:
             m "You hungry?"
             m "I can cook something up for you."
@@ -199,8 +247,7 @@ label menu_2:
                 m "Whatever it is, I checked. I waited a few hours."
                 pov "How would you even know which one was my friend?"
                 m "I know a bit about you, that's all I can say."
-                m "So do you wanna eat or not?"
-            else:
+                m "So...?"
                 m "Do you wanna eat?"
                 menu:
                     "Yes":
@@ -212,15 +259,23 @@ label menu_2:
                             m "... That made no sense. Nevermind."
                             m "I hate you, that's YOUR fault I can't speak."
                             $ Moerinn_heart -= 10
-                        elif Moerinn_anger >= 25:
+                        elif Moerinn_Anger >= 25:
                             m "You won't mind getting fed dog food, do you?"
                             m "Just... You know. Thought of treating you the way you're acting."
                             $ Moerinn_sadism += 5
                         else:
                             m "I'll get you something, be good!"
+                        "She left before I could say anything else..."
                         $ checkfloors = False
                         $ checkplant = False
                         $ checkboxes = False
                         $ checkcurtains = False
                         $ checkdrawers = False
                         jump menu_1
+                    "No":
+                        m "Okay!"
+                        m "I'll be back really quick though."
+                        "She left before I could say anything else..."
+                        jump menu_1
+
+label scenefood:
