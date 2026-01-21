@@ -32,3 +32,5 @@ default butterfly = False
 default caught = False
 default yellingdiag = False
 default Moerinn_tease = False
+
+default eastereggname = 0

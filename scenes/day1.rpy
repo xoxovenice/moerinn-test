@@ -36,6 +36,8 @@ label day1_start:
                         if Moerinn_check >= 5:
                                 $ caught = True
                                 jump menu_2
+                        elif butterfly == True:
+                            "There's nohing worth checking here anymore."
                         else:
                             "There's a butterfly knife here."
                         label bfk:
@@ -209,7 +211,7 @@ label menu_2:
                             m "MAYBE you'll be in mine if your stomach is full!"
                             m "... That made no sense. Nevermind."
                             m "I hate you, that's YOUR fault I can't speak."
-                            $ Moerinn_heart -= -10
+                            $ Moerinn_heart -= 10
                         elif Moerinn_anger >= 25:
                             m "You won't mind getting fed dog food, do you?"
                             m "Just... You know. Thought of treating you the way you're acting."
@@ -221,5 +223,4 @@ label menu_2:
                         $ checkboxes = False
                         $ checkcurtains = False
                         $ checkdrawers = False
-                        if:
-                            jump menu_1
+                        jump menu_1

@@ -5,6 +5,7 @@
 
  $ povname = renpy.input ("What is your name?", length=32)
  $ povname = povname.strip()
+ $ povname = povname.title()
 
  "I was walking around the mall."
 
@@ -113,7 +114,7 @@ label after_menu1:
             jump after_menu2
         "I'm [povname].":
             $ Moerinn_heart += 3
-            $ povblunt
+            $ povblunt += 1
             jump namesblunt
         "... I'm [povname].":
             $ Moerinn_heart += 3
