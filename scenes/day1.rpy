@@ -249,33 +249,33 @@ label menu_2:
                 m "I know a bit about you, that's all I can say."
                 m "So...?"
                 m "Do you wanna eat?"
-                menu:
-                    "Yes":
-                        m "Oh, great!"
-                        m "Cool."
-                        if Moerinn_Anger >= 25 and Moerinn_heart >= -10:
-                            m "You know how people say \"The best way to someone's heart is their stomach\"?"
-                            m "MAYBE you'll be in mine if your stomach is full!"
-                            m "... That made no sense. Nevermind."
-                            m "I hate you, that's YOUR fault I can't speak."
-                            $ Moerinn_heart -= 10
-                        elif Moerinn_Anger >= 25:
-                            m "You won't mind getting fed dog food, do you?"
-                            m "Just... You know. Thought of treating you the way you're acting."
-                            $ Moerinn_sadism += 5
-                        else:
-                            m "I'll get you something, be good!"
-                        "She left before I could say anything else..."
-                        $ checkfloors = False
-                        $ checkplant = False
-                        $ checkboxes = False
-                        $ checkcurtains = False
-                        $ checkdrawers = False
-                        jump menu_1
-                    "No":
-                        m "Okay!"
-                        m "I'll be back really quick though."
-                        "She left before I could say anything else..."
-                        jump menu_1
+            menu:
+                "Yes":
+                    m "Oh, great!"
+                    m "Cool."
+                    if Moerinn_Anger >= 25 and Moerinn_heart >= -10:
+                        m "You know how people say \"The best way to someone's heart is their stomach\"?"
+                        m "MAYBE you'll be in mine if your stomach is full!"
+                        m "... That made no sense. Nevermind."
+                        m "I hate you, that's YOUR fault I can't speak."
+                        $ Moerinn_heart -= 10
+                    elif Moerinn_Anger >= 25:
+                        m "You won't mind getting fed dog food, do you?"
+                        m "Just... You know. Thought of treating you the way you're acting."
+                        $ Moerinn_sadism += 5
+                    else:
+                        m "I'll get you something, be good!"
+                    "She left before I could say anything else..."
+                    $ checkfloors = False
+                    $ checkplant = False
+                    $ checkboxes = False
+                    $ checkcurtains = False
+                    $ checkdrawers = False
+                    jump menu_1
+                "No":
+                    m "Okay!"
+                    m "I'll be back really quick though."
+                    "She left before I could say anything else..."
+                    jump menu_1
 
 label scenefood:
