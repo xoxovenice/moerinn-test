@@ -18,7 +18,6 @@ default povquiet = 0
 default povrude = 0
 default povloud = 0
 default tas = False
-default aam = False
 default pinkcard = False
 default givename = False
 default aah = False
@@ -33,5 +32,5 @@ default caught = False
 default yellingdiag = False
 default Moerinn_tease = False
 default scenefinish = False
-
-default eastereggname = 0
+default donteat = False
+default drugged = 0

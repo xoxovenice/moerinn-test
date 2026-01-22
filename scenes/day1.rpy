@@ -182,7 +182,7 @@ label menu_2:
             m "Not only are you rude, you're also nosey."
             m "You really should work for the police,"
             m "Having more nosey bitches would really help them!"
-        elif Moerinn_Anger >= 10 and yellingdiag == True:
+        elif Moerinn_Anger >= 25 and yellingdiag == True:
             m "Will you ever stop barking like a dog?"
         else:
             m "Mind telling me why you were snooping around?"
@@ -197,7 +197,7 @@ label menu_2:
                     m "Anyway."
                 "Get me out of here!":
                     if Moerinn_Anger >= 25:
-                        $ Moerinn_Anger += 30
+                        $ Moerinn_Anger += 15
                     else:
                         $ Moerinn_Anger += 10
                     m "... I don't wanna."
@@ -273,9 +273,148 @@ label menu_2:
                     $ checkdrawers = False
                     jump menu_1
                 "No":
+                    $ Moerinn_Anger += 5
                     m "Okay!"
                     m "I'll be back really quick though."
                     "She left before I could say anything else..."
                     jump menu_1
 
 label scenefood:
+    if donteat == False:
+        "I heard the sound of something dropping, then breaking."
+        "Similar to a vase falling off a table."
+        m "{size=*0.5}Fu- Fiddlesticks-!"
+        "This time, I heard footsteps as she went up the stairs."
+        m "I'm back!"
+        "She walked up to me and placed a dog bowl on the floor."
+        m "... I don't completely trust you yet, sorry."
+        m "Actually, it's because I broke the bowl I was gonna give you and this is the closest I have."
+        if povquiet <= 3:
+            pov "You don't have another bowl?"
+            m "No, I do. I just have a specific bowl for you."
+            m "There's a bowl if you're good and there's a bowl if you're bad."
+            if Moerinn_Anger <= 15:
+                m "I'll buy a different bowl for you tommorrow."
+        m "... You're not vegan or anything, right?"
+        m "Because if you are then you probably won't like that meal."
+        "It looks like-"
+        m "It's porksteak!"
+        m "I uhm.... I got the recipe from my mom."
+        m "I really like how she cooked it back then."
+        "She then started giggling softly once more."
+        m "\"Back then\"? What am I? 53?"
+        m "Anyway... She makes it real well."
+        m "It's fairly simple but I like that about it."
+        menu:
+            "Do you ever shut up?" if povrude >= 3:
+                $ donteat = True
+                pov "Do you ever shut the fuck up?"
+                m "..."
+                m "Oh."
+                m "Well, screw you too, then!"
+                "She let out a choked laugh before kicking the dog bowl."
+                $ Moerinn_sadism += 3
+                m "Waste of food."
+                m "I'll feed you again tommorrow, you don't deserve dinner or even snacks."
+                jump donteatfood
+            "...":
+                m "Awww, it's ok. You don't have to speak!"
+                m "Just eat and tell me how you feel, okaaaay?"
+                $ drugged += 1
+                "So I just started eating."
+            "Eat the food":
+                $ drugged += 1
+                "She smiled as I started eating."
+                "Atleast she gave me utensils to eat with."
+        
+    label scenefood1:
+        "As I ate, I felt her just..."
+        "Stare."
+        "She didn't say anything, just smiled at me."
+        "It was unsettling, especially with her weirdo bug-eyes barely blinking."
+        m "Do you like it?"
+        menu:
+            "Yes":
+                pov "Yeah."
+                m "Really!?"
+                $ Moerinn_heart += 10
+                "She coughed for a moment."
+                m "I mean, really?"
+                menu:
+                    "Yeah":
+                        $ drugged += 1
+                        pov "Yeah."
+                        m "I'm so glad!"
+                    "no":
+                        $ lie_meter += 1
+                        pov "No."
+                        m "..."
+                        if lie_meter >= 3:
+                            m "I'm just curious..."
+                            m "Do you ever go one day without lying?"
+                        else:
+                            m "Don't lie to me next time."
+            "No...":
+                $ drugged += 1
+                if Moerinn_Anger >= 35:
+                    $ Moerinn_Anger += 25
+                    m "Well, keep eating because I'm not cooking another meal for you."
+                    m "So ungrateful. I went out of my way to cook for you even if you've been rude."
+                else:
+                    m "That bad...?"
+                    m "I should've practiced beforehand..."
+                    if povquiet <= 3:
+                        pov "Wait, you didn't practice beforehand?"
+                        m "Yeah, it's my first time cooking that."
+                        m "I should've added more lemon or something..."
+            "...":
+                $ drugged += 1
+                m "I'll take that as a yes."
+                m "Good job me, doing so good you left 'em speechless."
+                "She struggled to pat herself at the back, unable to tell how she should before just smacking her chest."
+                m "Take that, grandma!"
+            "Don't eat it":
+                m "... Why aren't you touching your food anymore?"
+                m "Did I do something wrong?"
+                m "{size=*0.5}Did they find out I added something in it...?"
+                "She took the bowl away and smiled awkwardly."
+                jump donteatfood
+            "Pretend to eat it":
+                m "Oh!"
+                $ Moerinn_heart += 10
+                m "You liked it that much?"
+                "She seemed... Happy by my response."
+        "At some point, I had stopped eating, and looked up at her."
+        "She's still staring at me!" with vpunch
+        m "Oh! Sorry, I'll take that away now."
+        "She picked up the bowl and left."
+        if drugged >= 2:
+            "I felt..."
+            "Off."
+            "She came back to the room, but instead of fully entering—she just peeked her head out."
+            m "{size=*0.9}You alright?"
+            "She sounded a bit far."
+            m "{size=*0.7}You look woozy."
+            "I was."
+            if givename == False:
+                m "{size=*0.5}I didn't even get your name yet..."
+            else:
+                m "{size=*0.5}That's a shame, I didn't even get to know you all that well yet."
+            "What was she saying..?"
+            m "{size=*0.3}Goodnight, [povname]."
+        jump night1
+
+label donteatfood:
+    if donteat == True:
+        "She left me alone."
+        # add stuff here laterrrr
+    else:
+        m "I'll come back later to give you snacks, okay? Just... Try to rest in the mean time."
+        "She left quickly after, holding the bowl of unfinished food in her hands."
+    label doorthoughts:
+        "I've already checked her things, there's nowhere else to—"
+        "Wait."
+        "She left the door unlocked."
+        "Maybe I can go out and—"
+        "No, I have to be careful."
+        

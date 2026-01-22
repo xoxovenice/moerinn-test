@@ -126,9 +126,12 @@ label after_menu1:
             jump nameshappy
         "...":
             $ povquiet += 1
+            $ povrude += 1
             $ Moerinn_Anger += 1
             if povquiet >= 3:
              m "Do you really not talk or..?"
+            elif povrude >= 2:
+                m "... Guess you're not a big talker."
             else:
              m "... Oooookay."
              $ dddres = True
