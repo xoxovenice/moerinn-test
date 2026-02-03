@@ -406,7 +406,7 @@ label scenefood:
                 m "{size=*0.5}That's a shame, I didn't even get to know you all that well yet."
             "What was she saying..?"
             if givename == True:
-                m "{size=*0.3}Goodnight, [povname]."
+                m "{size=*0.3}Goodnight, [povname]"
             else:
                 m "{size=*0.3}Goodnight."
             "I felt her hand caress my head softly as I black out."

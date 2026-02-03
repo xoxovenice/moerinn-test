@@ -36,3 +36,5 @@ default donteat = False
 default drugged = 0
 default bonding = 0
 default pretendeat = False
+default idk = 0
+default corrans = 0
