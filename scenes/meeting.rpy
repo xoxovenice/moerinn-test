@@ -1,140 +1,138 @@
 ﻿label start:
- scene black
- with fade
- centered "{color=B50E0E}{size=80}WARNING{/100}\n \nThis game contains topics such as: \nKidnapping \nPhysical Harm \nDeath \nScreenshakes \n and possibly more as I update it. \n \nBy continuing, you agree that you understand these warnings. \nPLEASE click off if any of them are\npossibly triggering for you."
+    scene black
+    with fade
+    centered "{color=B50E0E}{size=80}WARNING{/100}\n \nThis game contains topics such as: \nKidnapping \nPhysical Harm \nDeath \nScreenshakes \n and possibly more as I update it. \n \nBy continuing, you agree that you understand these warnings. \nPLEASE click off if any of them are\npossibly triggering for you."
 
- $ povname = renpy.input ("What is your name?", length=32)
- $ povname = povname.strip()
- $ povname = povname.title()
+    $ povname = renpy.input ("What is your name?", length=32)
+    $ povname = povname.strip()
+    $ povname = povname.title()
 
- "I was walking around the mall."
+    "I was walking around the mall."
 
- "It just so happened to be the day a cosplay convention was scheduled."
+    "It just so happened to be the day a cosplay convention was scheduled."
 
- "Crowds of people surrounding my line of sight no matter where I looked."
+    "Crowds of people surrounding my line of sight no matter where I looked."
 
- "As I sat down to rest for a moment,"
- 
- "As I sat down to rest for a moment, a girl sat down next to me."
+    "As I sat down to rest for a moment,"
+    
+    "As I sat down to rest for a moment, a girl sat down next to me."
 
- "I felt her glance at me, but once I stared back at her-"
+    "I felt her glance at me, but once I stared back at her-"
 
- "She had already looked away."
+    "She had already looked away."
 
- "Aside from the crowd nearby,"
- 
- "It was mostly silent between the two of us sitting there."
- 
- "I had assumed she's waiting for a friend until she spoke up suddenly."
+    "Aside from the crowd nearby,"
+    
+    "It was mostly silent between the two of us sitting there."
+    
+    "I had assumed she's waiting for a friend until she spoke up suddenly."
 
- m "There's a lot of people here, haha." 
- 
- "She laughed awkwardly, seemingly trying to break the silence. But it felt like it just got worse."
-
- menu:
-        "Be sarcastic":
-               $ Moerinn_heart -= 5
-               $ Moerinn_Anger += 5
-               $ povrude += 1 
-               pov "Yeah, really? You think?"
-               m "Yeah, there's like 10 people just right ther-"
-               m "Oh."
-               m "That's not a very nice tone..."
-        "Awkwardly reply":
-               $ Moerinn_heart += 5
-               $ povmeek += 1
-               pov "Haha, yeah... There's an event going on."
-               m "It's a... Uhm..."
-               m "What's the word again...?"
-               m "Cosplay convention!"
-               "She smiled brightly, excited by the idea of it."
-        "Be blunt":
-               $ povblunt += 1
-               pov "There's an event going on."
-               m "... Yeah. It's cosplay convention."
-               m "..."
-               "She looked back away from me immediately after."
-        "...":
-               $ povquiet += 1
-               m "..."
-               "She stopped attempting to talk to me for a few moments."
-
-label after_menu:
-    "She fidgeted with her hands quietly before opening her mouth once more."
-    m "Are you here for the convention or...?"
-    "She paused as if waiting for my answer."
-    menu:
-        "Yeah, I am.":
-            $ cosconreply = True
-            m "Really?"
-            $ Moerinn_heart += 5
-            m "So am I!"
-            m "It's just so much fun for me to see my interests liked by so many others!"
-            m "You don't mind talking with me, right?"
-            m "It's not often I meet new people!"
-        "No, I'm not.":
-            $ Moerinn_heart += 3
-            m "Oh."
-            m "That's alright!"
-            m "I guess you just got here the wrong time!"
-            "She softly smiled as she stared at me."
-            m "You don't mind chatting with me, right?"
-        "(lie) I'm waiting for a friend.":
-         $ lie_meter += 1
-         $ friendreply = True
-         "She stared at me for a moment."
-         m "Oh."
-         m "Alright!"
-         m "You don't mind chatting while you wait, right?"
-         m "It's not often I meet new people!"
-        "Why do you even wanna know?":
-            $ Moerinn_heart -= 2
-            $ Moerinn_Anger += 1
-            $ povblunt += 1
-            $ wdyewk = True
-            m "I was just curious, sorry...?"
-            "She looked away and kept fidgeting with her fingers."
-        "...":
-            $ povquiet += 1
-            m "You don't talk much, do you?"
-
-label after_menu1:
-    m "... Thinking about it now, it's probably really weird of a stranger to randomly start a conversation..."
-    m "I mean, I haven't even asked about your day or your name!"
-
-    if wdyewk == True or povquiet >= 2:
-       m "Some stranger I am, haha..."
-    else:
-       m "Some stranger I am, haha!"
-    m "If you want, I'll let you introduce yourself first!"
+    m "There's a lot of people here, haha." 
+    
+    "She laughed awkwardly, seemingly trying to break the silence. But it felt like it just got worse."
 
     menu:
-        "You go first.":
-            $ Moerinn_heart += 1
-            jump after_menu2
-        "I'm [povname].":
-            $ Moerinn_heart += 3
-            $ povblunt += 1
-            jump namesblunt
-        "... I'm [povname].":
-            $ Moerinn_heart += 3
-            $ povmeek += 1
-            jump namesmeek
-        "I'm [povname]!":
-            $ Moerinn_heart += 4
-            $ povhappy += 1
-            jump nameshappy
-        "...":
-            $ povquiet += 1
-            $ povrude += 1
-            $ Moerinn_Anger += 1
-            if povquiet >= 3:
-             m "Do you really not talk or..?"
-            elif povrude >= 2:
-                m "... Guess you're not a big talker."
-            else:
-             m "... Oooookay."
-             $ dddres = True
+            "Be sarcastic":
+                $ Moerinn_Anger += 5
+                $ povrude += 1 
+                pov "Yeah, really? You think?"
+                m "Yeah, there's like 10 people just right ther-"
+                m "Oh."
+                m "That's not a very nice tone..."
+            "Awkwardly reply":
+                $ Moerinn_heart += 5
+                $ povmeek += 1
+                pov "Haha, yeah... There's an event going on."
+                m "It's a... Uhm..."
+                m "What's the word again...?"
+                m "Cosplay convention!"
+                "She smiled brightly, excited by the idea of it."
+            "Be blunt":
+                $ povblunt += 1
+                pov "There's an event going on."
+                m "... Yeah. It's cosplay convention."
+                m "..."
+                "She looked back away from me immediately after."
+            "...":
+                $ povquiet += 1
+                m "..."
+                "She stopped attempting to talk to me for a few moments."
+
+    label after_menu:
+        "She fidgeted with her hands quietly before opening her mouth once more."
+        m "Are you here for the convention or...?"
+        "She paused as if waiting for my answer."
+        menu:
+            "Yeah, I am.":
+                $ cosconreply = True
+                m "Really?"
+                $ Moerinn_heart += 5
+                m "So am I!"
+                m "It's just so much fun for me to see my interests liked by so many others!"
+                m "You don't mind talking with me, right?"
+                m "It's not often I meet new people!"
+            "No, I'm not.":
+                $ Moerinn_heart += 3
+                m "Oh."
+                m "That's alright!"
+                m "I guess you just got here the wrong time!"
+                "She softly smiled as she stared at me."
+                m "You don't mind chatting with me, right?"
+            "(lie) I'm waiting for a friend.":
+                $ lie_meter += 1
+                $ friendreply = True
+                "She stared at me for a moment."
+                m "Oh."
+                m "Alright!"
+                m "You don't mind chatting while you wait, right?"
+                m "It's not often I meet new people!"
+            "Why do you even wanna know?":
+                $ Moerinn_Anger += 1
+                $ povblunt += 1
+                $ wdyewk = True
+                m "I was just curious, sorry...?"
+                "She looked away and kept fidgeting with her fingers."
+            "...":
+                $ povquiet += 1
+                m "You don't talk much, do you?"
+
+    label after_menu1:
+        m "... Thinking about it now, it's probably really weird of a stranger to randomly start a conversation..."
+        m "I mean, I haven't even asked about your day or your name!"
+
+        if wdyewk or povquiet >= 2:
+            m "Some stranger I am, haha..."
+        else:
+            m "Some stranger I am, haha!"
+            m "If you want, I'll let you introduce yourself first!"
+
+        menu:
+            "You go first.":
+                $ Moerinn_heart += 1
+                jump after_menu2
+            "I'm [povname].":
+                $ Moerinn_heart += 3
+                $ povblunt += 1
+                jump namesblunt
+            "... I'm [povname].":
+                $ Moerinn_heart += 3
+                $ povmeek += 1
+                jump namesmeek
+            "I'm [povname]!":
+                $ Moerinn_heart += 4
+                $ povhappy += 1
+                jump nameshappy
+            "...":
+                $ povquiet += 1
+                $ povrude += 1
+                $ Moerinn_Anger += 1
+                if povquiet >= 3:
+                    m "Do you really not talk or..?"
+                elif povrude >= 2:
+                    m "... Guess you're not a big talker."
+                else:
+                    m "... Oooookay."
+                $ dddres = True
 
 
 label after_menu2:
@@ -143,7 +141,7 @@ label after_menu2:
         $ Moerinn_Met = True
         $ moerinn_name = "Moerinn"
     else:
-     m "I'm Moerinn!"
+        m "I'm Moerinn!"
     if Moerinn_Met == False:
         $ Moerinn_Met = True
         $ moerinn_name = "Moerinn"

@@ -34,3 +34,5 @@ default Moerinn_tease = False
 default scenefinish = False
 default donteat = False
 default drugged = 0
+default bonding = 0
+default pretendeat = False

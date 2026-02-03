@@ -73,7 +73,7 @@ label namesblunt:
         m "Yeah. I'm the only character aside from you."
         m "I'll be honest, I still didn't expect you to come here."
         pov "What the hell are you talking about?"
-        m "Nevermid it."
+        m "Nevermind it."
         "What the hell?"
         $ sanity -= 10
     elif povname in ["Valerie"]:

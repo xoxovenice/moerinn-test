@@ -125,6 +125,8 @@ label menu_2:
         m "I didn't expect you to be able to yell, you've been so quiet!"
     elif Moerinn_Anger <= 7:
         m "Oh! You're awake already!"
+    elif Moerinn_Anger >= 7:
+        m "Oh."
     "I didn't even hear her footsteps!" with vpunch
     if Moerinn_Anger >= 7:
         m "So... Did you sleep well, jerk?"
@@ -234,50 +236,50 @@ label menu_2:
             jump menu_3
     else:
         m "I really hope you don't mind me keeping you captive."
-        label menu_3:
-            m "You hungry?"
-            m "I can cook something up for you."
-            if Moerinn_Anger >= 10:
-                m "Even if you piss me off."
-            if friendreply == True:
-                m "Also, your friend never came."
-                "What is she talking about?"
-                m "Like... Yesterday?"
-                m "You either lied or they cancelled on you. Or something!"
-                m "Whatever it is, I checked. I waited a few hours."
-                pov "How would you even know which one was my friend?"
-                m "I know a bit about you, that's all I can say."
-                m "So...?"
-                m "Do you wanna eat?"
-            menu:
-                "Yes":
-                    m "Oh, great!"
-                    m "Cool."
-                    if Moerinn_Anger >= 25 and Moerinn_heart >= -10:
-                        m "You know how people say \"The best way to someone's heart is their stomach\"?"
-                        m "MAYBE you'll be in mine if your stomach is full!"
-                        m "... That made no sense. Nevermind."
-                        m "I hate you, that's YOUR fault I can't speak."
-                        $ Moerinn_heart -= 10
-                    elif Moerinn_Anger >= 25:
-                        m "You won't mind getting fed dog food, do you?"
-                        m "Just... You know. Thought of treating you the way you're acting."
-                        $ Moerinn_sadism += 5
-                    else:
-                        m "I'll get you something, be good!"
-                    "She left before I could say anything else..."
-                    $ checkfloors = False
-                    $ checkplant = False
-                    $ checkboxes = False
-                    $ checkcurtains = False
-                    $ checkdrawers = False
-                    jump menu_1
-                "No":
-                    $ Moerinn_Anger += 5
-                    m "Okay!"
-                    m "I'll be back really quick though."
-                    "She left before I could say anything else..."
-                    jump menu_1
+label menu_3:
+    m "You hungry?"
+    m "I can cook something up for you."
+    if Moerinn_Anger >= 10:
+        m "Even if you piss me off."
+    if friendreply == True:
+        m "Also, your friend never came."
+        "What is she talking about?"
+        m "Like... Yesterday?"
+        m "You either lied or they cancelled on you. Or something!"
+        m "Whatever it is, I checked. I waited a few hours."
+        pov "How would you even know which one was my friend?"
+        m "I know a bit about you, that's all I can say."
+        m "So...?"
+        m "Do you wanna eat?"
+    menu:
+        "Yes":
+            m "Oh, great!"
+            m "Cool."
+            if Moerinn_Anger >= 25 and Moerinn_heart >= -10:
+                m "You know how people say \"The best way to someone's heart is their stomach\"?"
+                m "MAYBE you'll be in mine if your stomach is full!"
+                m "... That made no sense. Nevermind."
+                m "I hate you, that's YOUR fault I can't speak."
+                $ Moerinn_heart -= 10
+            elif Moerinn_Anger >= 25:
+                m "You won't mind getting fed dog food, do you?"
+                m "Just... You know. Thought of treating you the way you're acting."
+                $ Moerinn_sadism += 5
+            else:
+                m "I'll get you something, be good!"
+            "She left before I could say anything else..."
+            $ checkfloors = False
+            $ checkplant = False
+            $ checkboxes = False
+            $ checkcurtains = False
+            $ checkdrawers = False
+            jump menu_1
+        "No":
+            $ Moerinn_Anger += 5
+            m "Okay!"
+            m "I'll be back really quick though."
+            "She left before I could say anything else..."
+            jump menu_1
 
 label scenefood:
     if donteat == False:
@@ -384,6 +386,8 @@ label scenefood:
                 $ Moerinn_heart += 10
                 m "You liked it that much?"
                 "She seemed... Happy by my response."
+                $ pretendeat = True
+                jump donteatfood
         "At some point, I had stopped eating, and looked up at her."
         "She's still staring at me!" with vpunch
         m "Oh! Sorry, I'll take that away now."
@@ -401,7 +405,13 @@ label scenefood:
             else:
                 m "{size=*0.5}That's a shame, I didn't even get to know you all that well yet."
             "What was she saying..?"
-            m "{size=*0.3}Goodnight, [povname]."
+            if givename == True:
+                m "{size=*0.3}Goodnight, [povname]."
+            else:
+                m "{size=*0.3}Goodnight."
+            "I felt her hand caress my head softly as I black out."
+            scene black
+            with fade
         jump night1
 
 label donteatfood:
@@ -409,7 +419,7 @@ label donteatfood:
         "She left me alone."
         # add stuff here laterrrr
     else:
-        m "I'll come back later to give you snacks, okay? Just... Try to rest in the mean time."
+        m "I'll come back later to give you snacks or something else, okay? Just... Try to rest in the mean time."
         "She left quickly after, holding the bowl of unfinished food in her hands."
     label doorthoughts:
         "I've already checked her things, there's nowhere else to—"
@@ -417,4 +427,53 @@ label donteatfood:
         "She left the door unlocked."
         "Maybe I can go out and—"
         "No, I have to be careful."
-        
+        "She might hear me, the floorboards creak."
+        "I heard her going up the stairs again."
+        m "Okay, so."
+        if pretendeat:
+            m "{size=*0.5} The drugs might take a while to take effect.."
+            "Was she mumbling something?"
+        "She rubbed her wet hands against her shirt."
+        m "Be good. Rest or something."
+        m "{size=*0.3}Don't do anything funky just because I couldn't drug you."
+        m "Wait-"
+        m "Actually... Do you wanna play?"
+        if Moerinn_Anger >=50:
+            m "I'm just kidding!"
+            m "You don't have a choice."
+            m "You're playing with me."
+        else:
+            menu:
+                "Play":
+                    m "Great! Cool!"
+                    m "Uhm..." 
+                    m "We're gonna play..."
+                "Refuse":
+                    m "Oh..."
+                    m "I kinda..."
+                    m "Wanted to play."
+        "She paused for a moment, finally refusing my gaze."
+        "Her eye contact was so..."
+        "Overwhelming."
+        "She looked around again."
+        "Then walked up to the boxes at the end of the room."
+        m "... Hmmm... What to play... What to plaaay....?"
+        m "Oh!"
+        "She stood up and walked in front of me, her smile wider than her usual."
+        m "It's not really a game but it's an old thing I have because.."
+        "She yawned." # I actually yawned before this
+        m "Because my little brother used to use them..."
+        m "Well, my grandmother and little brother."
+        m "She used to teach him, he was... Different. So she tried to school him instead."
+        m "It worked for a while but then he got a phone."
+        "She stood up and turned around, blank faced as she walked up to me."
+        m "Anyway."
+        m "Let's play this!"
+        "She beamed as she held out the the \"game\"."
+        "It was a bunch of flashcards. The kind for toddlers."
+        m "It'll be our first bonding time with eachother!"
+        $ bonding += 1
+        m "You'll be the one answering, okay?"
+        m "This is easy so you'll probably know anyway! You're smarter than me, right?"
+        "She sat down in front of me and held the first card out."
+        jump flashcards
